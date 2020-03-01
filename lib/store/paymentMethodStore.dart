@@ -7,19 +7,24 @@ part 'paymentMethodStore.g.dart';
 
 DatabaseAPI _api = DatabaseAPI();
 
-class paymentMethodStore = paymentMethodBase with _$paymentMethodStore;
+class PaymentMethodStore = PaymentMethodBase with _$PaymentMethodStore;
 
-abstract class paymentMethodBase with Store {
+abstract class PaymentMethodBase with Store {
     @observable
   ObservableList<PaymentMethod> paymentMethods = ObservableList<PaymentMethod>.of([]);
 
     @action
-    Future<Null> fetchProducts(String categoryUid) async {
+    Future<Null> fetchPaymentMethods() async {
       QuerySnapshot query = await _api.fetchPaymentMethod();
       paymentMethods = ObservableList.of(
         query.documents
             .map((DocumentSnapshot doc) => PaymentMethod.fromJson(doc.data))
             .toList(),
       );
+    }
+
+    @action
+    void initState() {
+      fetchPaymentMethods();
     }
 }

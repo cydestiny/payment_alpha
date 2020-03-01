@@ -2,7 +2,7 @@ class PaymentMethod {
   final String _name, _merchantID;
 
   String get name => _name;
-  String get merchantID => merchantID;
+  String get merchantID => _merchantID;
 
   PaymentMethod({
     String name,
@@ -13,7 +13,7 @@ class PaymentMethod {
   factory PaymentMethod.fromJson(Map<String, dynamic> json){
     return PaymentMethod(
       name: json['name'],
-      merchantID: json['merchantID',]
+      merchantID: json['merchantID']
     );
   }
 }
